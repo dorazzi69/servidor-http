@@ -3,21 +3,34 @@ import { URL } from 'node:url'
 
 const porta = 3000
 
-const server = http.createServer();
+const server = http.createServer()
 
 const requisicao = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
-    res.statusCode = 200;
-     const urlObj = new URL(req.url, `http://${req.headers.host}`);
+    res.statusCode = 200
+    const urlObj = new URL(req.url, `http://${req.headers.host}`);
 
     if (req.method === 'GET' && urlObj.pathname === '/saudacao') {
         const nome = urlObj.searchParams.get('nome');
-        return res.end(JSON.stringify({"nome": nome}))
+        return res.end(JSON.stringify({ "nome": nome }));
     }
-   
-    const nome = urlObj.searchParams.get('nome');
-    console.log(nome);
-    return res.write(JSON.stringify({ "nome": nome }));
+
+    else if (req.method === 'GET' && urlObj.pathname === '/') {
+        return res.end(JSON.stringify({ "data": "Esta é a página inicial." }));
+    }
+
+    else if (req.method === 'GET' && urlObj.pathname === '/contato') {
+        return res.end(JSON.stringify(
+            { "data": 
+                [{ "telefone": "67 99999-9999", "e-mail": "email@gmail.com" }]
+            }))
+    }
+     else if (req.method === 'GET' && urlObj.pathname === '/produtos') {
+        return res.end(JSON.stringify(
+            { "data": 
+                [{ "produto": "cadeira gamer", "valor": "R$ 500,00" }]
+            }))
+    }
 
     return res.end(JSON.stringify({ "chave": "valor" }));
 
