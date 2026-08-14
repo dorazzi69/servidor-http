@@ -6,11 +6,10 @@ const server = http.createServer();
 
 server.on('request', (req, res) => {
     console.log(`Servidor Funcionando! ${req.method} ${req.url}`);
-    console.log(new Date().toISOString());
 
     res.statusCode = 200
-    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-    res.end("Servidor funcionando!");
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({ status: "ok" }));
 });
 
 server.listen(porta, () => {
