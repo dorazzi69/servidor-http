@@ -7,7 +7,7 @@ const server = http.createServer()
 
 const requisicao = (req, res) => {
     res.setHeader('Content-Type', 'application/json')
-    res.statusCode = 200
+    res.statusCode = 201
 
     const urlObj = new URL(req.url, `http://${req.headers.host}`)
 
@@ -26,7 +26,9 @@ const requisicao = (req, res) => {
         }))
     }
 
-    return res.end(JSON.stringify({ chave: 'valor' }))
+    res.statusCode = 404
+    return res.end(JSON.stringify({ "erro": "nao definido"}));
+
 }
 
 server.on('request', requisicao)
