@@ -7,9 +7,10 @@ const server = http.createServer();
 server.on('request', (req, res) => {
     console.log(`Servidor Funcionando! ${req.method} ${req.url}`);
 
+
     res.statusCode = 200
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ status: "ok" }));
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    //o servidor nao carrega,pois fica aguardando infinitamente a conclusao da resposta
 });
 
 server.listen(porta, () => {
