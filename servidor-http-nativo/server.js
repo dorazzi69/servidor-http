@@ -6,6 +6,8 @@ const porta = 3000
 const server = http.createServer()
 
 const requisicao = (req, res) => {
+    console.log(req.method, req.url)
+
     res.setHeader('Content-Type', 'application/json')
     res.statusCode = 201
 
@@ -26,8 +28,7 @@ const requisicao = (req, res) => {
         }))
     }
 
-    res.statusCode = 404
-    return res.end(JSON.stringify({ "erro": "nao definido"}));
+
 
 }
 
